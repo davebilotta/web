@@ -1,0 +1,65 @@
+#header { 
+	width: 100%;
+	vertical-align: top;
+	
+}
+
+a { 
+text-decoration: none;
+}
+
+#banner {
+	width: 40%;
+	float: left;
+	text-align: left;
+	border: 1px solid black;
+	vertical-align: top;
+	display: inline-block;
+
+}
+
+#nav-container {
+	width: 58%;
+	float: right;
+	text-align: right;
+	border: 1px solid black;
+	vertical-align: top;
+	display: inline-block;
+	margin-top: 0px;
+
+}
+
+.nav-item {
+	text-align: left;
+	color: red;
+	list-style: none;
+	display: inline;
+	margin-right: 20px;
+	border: 1px solid black;
+	background-color: #369;
+}
+
+#nav-container ul li a:hover {
+color: #000;
+background-color: #fff;
+
+}
+
+#nav-list {
+	margin-top: 0px;
+}
+
+#body-image { 
+position: absolute;
+margin-top:50px;
+
+z-index: 1;
+
+}
+
+#body-image2 { 
+position: absolute;
+margin-top: 50px;
+  
+z-index: -1;
+}
