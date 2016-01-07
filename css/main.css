@@ -1,11 +1,10 @@
 #header { 
 	width: 100%;
 	vertical-align: top;
-	
 }
 
 a { 
-text-decoration: none;
+	text-decoration: none;
 }
 
 #banner {
@@ -15,7 +14,6 @@ text-decoration: none;
 	border: 1px solid black;
 	vertical-align: top;
 	display: inline-block;
-
 }
 
 #nav-container {
@@ -26,7 +24,6 @@ text-decoration: none;
 	vertical-align: top;
 	display: inline-block;
 	margin-top: 0px;
-
 }
 
 .nav-item {
@@ -39,10 +36,9 @@ text-decoration: none;
 	background-color: #369;
 }
 
-#nav-container ul li a:hover {
-color: #000;
-background-color: #fff;
-
+#nav-container ul li a:hover {`
+	color: #000;
+	background-color: #fff;
 }
 
 #nav-list {
@@ -50,16 +46,13 @@ background-color: #fff;
 }
 
 #body-image { 
-position: absolute;
-margin-top:50px;
-
-z-index: 1;
-
+	position: absolute;
+	margin-top: 50px;
+	z-index: 1;
 }
 
 #body-image2 { 
-position: absolute;
-margin-top: 50px;
-  
-z-index: -1;
+	position: absolute;
+	margin-top: 50px;
+	z-index: -1;
 }

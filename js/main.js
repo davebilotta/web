@@ -1,35 +1,33 @@
 $(document).ready(function() {
 
-var fileNames = [];
-var counter;
-var delay = 10000;
-var swapping = false;
+var fileNames = [];      // List of file names for images in portfolio (no path)
+var imgNum;              // Image number 
+var swapDelay = 10000;   // Number of seconds in between swapping images
+var swapping = false;    // Used to disable swapping of images via keystroke/clicking while swapping in progress
 
 $(window).resize(scaleImage);
 
 $(window).keyup(function( event ) {
-	//if (event.which == 37) getPrevImage();
 	if (event.which == 39) swapImages;
 });
 
 $("#body-image").click(swapImages);
 
-/*
-$("#body-image").hover(function() {
-	$("#body-image").css("opacity",0.6);
-}); */
+init();
 
-main();
+setInterval(swapImages,swapDelay);
 
-setInterval(swapImages,delay);
+function init() {
+	/* Does initial setup - loads images and sets first one */
 
-function main() {
 	loadImages();
-	getNextImage();
 	scaleImage();
+	getNextImage();
 }
 
 function loadImages() {
+	/* Initializes image file names */
+	
 	fileNames = [
 	 	"IMG_8458.jpg",
 		"IMG_8649.jpg",
@@ -38,15 +36,15 @@ function loadImages() {
 		"IMG_9094.jpg",
      ];
 
-	counter = fileNames.length - 1;
+	imgNum = fileNames.length - 1;
 }
 
 function scaleImage() {
+	/* Scales image to appropriate width and height based on screen height/width */
+
 	var w = $(window).innerWidth() * 0.5;
 	var h = $(window).innerHeight() * 0.5;
 
-	//$("#body-image").attr( "width","100%").attr("height","auto");
-	//$("#body-image2").attr( "width","100%").attr("height","auto");
 	$("#body-image").attr( "width",w).attr("height","auto");
 	$("#body-image2").attr( "width",w).attr("height","auto");
 	console.log("setting width to " + w + " and height to " + h);
@@ -54,61 +52,71 @@ function scaleImage() {
 }
 
 function getPrevImage() {
-	console.log("Previous image");
-	decrement();
+	/* Get previous image - decrements image number and sets image */
+
+	prev();
 	setImage();
 }
 
-function decrement() { 
-counter--;
+function prev() { 
+	/* Decrement image number by 1 or reset to end once we get to beginning */
+	
+	imgNum--;
 
-	if (counter < 0) {
-		counter = fileNames.length -1;
+	if (imgNum < 0) {
+		imgNum = fileNames.length -1;
 	}
 }
 
-function increment(){
-	counter++;
+function next() {
+	/* Increment image number by 1 or reset to 0 once we get to end */
 
-	if (counter >= fileNames.length) {
-		counter = 0;
+	imgNum++;
+
+	if (imgNum >= fileNames.length) {
+		imgNum = 0;
 	}
 }
 
 function getNextImage() {
-	console.log("Next image");
-	increment();	
+	/* Get next image - increments image number and sets image */
+
+	next();	
 	setImage();
 }
 
-// This is only used to set the image originally
 function setImage() {
-	$("#body-image").attr("src","/portfolio/images/" + fileNames[counter]);
+	/* Sets source of image */
+
+	$("#body-image").attr("src","/portfolio/images/" + fileNames[imgNum]);
 }
 
 function swapImages() { 
+	/* Used to swap images - fade out current image and fade in next image */
+
 	if (!swapping) {
-	var fadeDelay = 3000;
-	swapping = true;
-	$("#body-image").css("opacity",1.0);
+		var fadeDelay = 3000;   // How long images will take to fade in/out
+		swapping = true;        // We're currently swapping images
 
-	//
-	// Get next image 
-	increment();
-	// 
-	// set bottom image opacity and source
-	$("#body-image2").css("opacity",0.0);
-	$("#body-image2").attr("src","/portfolio/images/" + fileNames[counter]);
+		// Set opacity of current image
+		$("#body-image").css("opacity",1.0);
 
-	// Start to fade out top 
-	$("#body-image").animate({opacity: 0.0}, fadeDelay, function() {
-	});
+		// Get next image 
+		next();
+		
+		// Set bottom image opacity and source
+		$("#body-image2").css("opacity",0.0);
+		$("#body-image2").attr("src","/portfolio/images/" + fileNames[imgNum]);
 
-	// Start to fade in bottom (body-image2) 
-	$("#body-image2").animate({opacity: 1.0}, fadeDelay, function() {
-		setImage();
-		swapping = false;
-	});
+		// Start to fade out top image
+		$("#body-image").animate({opacity: 0.0}, fadeDelay, function() {
+		});
+
+		// Start to fade in bottom image
+		$("#body-image2").animate({opacity: 1.0}, fadeDelay, function() {
+			setImage();
+			swapping = false;
+		});
 	}
 }
 
